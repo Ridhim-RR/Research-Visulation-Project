@@ -5,24 +5,23 @@
 1. Create and activate a virtual environment:
 
 ```bash
-cd backend
 python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-1. Install dependencies:
+1. Install backend dependencies:
 
 ```bash
-pip install -r requirements.txt
+pip install -r backend/requirements.txt
 ```
 
-1. Start the server:
+1. Start the API server:
 
 ```bash
 uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
-1. Verify health endpoint:
+1. Verify the health endpoint:
 
 ```bash
 curl http://127.0.0.1:8000/health
@@ -33,6 +32,52 @@ Expected response:
 ```json
 {"status":"ok"}
 ```
+
+## Frontend Setup (Vite)
+
+1. Install frontend dependencies:
+
+```bash
+cd frontend
+npm install
+```
+
+1. Run the Vite dev server:
+
+```bash
+npm run dev
+```
+
+Open the frontend at:
+
+```bash
+http://127.0.0.1:5173/
+```
+
+Vite proxies `/api` and `/health` to FastAPI on port 8000.
+
+## Production Frontend Build
+
+1. Build the frontend for FastAPI to serve:
+
+```bash
+cd frontend
+npm run build
+```
+
+1. Start FastAPI and open:
+
+```bash
+http://127.0.0.1:8000/
+```
+
+## Frontend Scope
+
+The current frontend is intentionally minimal:
+
+1. upload a MAT file
+2. send it to the FastAPI visualization endpoint
+3. show the returned Semani figures in the browser
 
 ## EEG Semani Processing API
 
